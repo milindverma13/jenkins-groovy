@@ -16,9 +16,9 @@ job("task6-job1") {
   
   steps {
     dockerBuildAndPublish {
-      repositoryName('ashishkr99/httpd-server')
+      repositoryName('milindverma/webserver')
       tag("latest")
-      dockerHostURI('tcp://0.0.0.0:1234')
+      dockerHostURI('tcp://0.0.0.0:4243')
       registryCredentials('docker-hub')
       createFingerprints(false)
       skipDecorate(false)
@@ -44,7 +44,7 @@ then
 		sudo kubectl rollout restart deployment/webserver
 		sudo kubectl rollout status deployment/webserver
   else
-		sudo kubectl create deployment webserver --image=ashishkr99/httpd-server:latest
+		sudo kubectl create deployment webserver --image=milindverma/webserver
 		sudo kubectl scale deployment webserver --replicas=3
 		sudo kubectl expose deployment webserver --port 80 --type NodePort
 	fi
@@ -80,13 +80,13 @@ fi''')
           attachBuildLog(true)
           subject('Build successfull')
           content('The build was successful and deployment was done.')
-          recipientList('ashish.dav99@gmail.com')
+          recipientList('milind302012@gmail.com')
         }
         failure{
           attachBuildLog(true)
           subject('Failed build')
           content('The build was failed')
-          recipientList('ashish.dav99@gmail.com')
+          recipientList('milind302012@gmail.com')
         }
       }
     }
